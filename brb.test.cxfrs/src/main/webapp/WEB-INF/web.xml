@@ -6,27 +6,32 @@
 
 
 	<display-name>My App</display-name>
-	<description>
-		My Application
-	</description>
+	<description>my Application</description>
 	<welcome-file-list>
 		<welcome-file>test.html</welcome-file>
 	</welcome-file-list>
-	<servlet>
-		<servlet-name>jersey-servlet</servlet-name>
-		<servlet-class>
-                     com.sun.jersey.spi.container.servlet.ServletContainer
-                </servlet-class>
-		<init-param>
-		     <param-name>com.sun.jersey.config.property.packages</param-name>
-		     <param-value>brb.research.rest</param-value>
-		     </init-param>
 
+	<servlet>
+	
+		<!-- #_#_#_#_#_#_#_#_#_#_# JERSEY JAX RS CONFIGURATION #_#_#_#_#_#_#_#_#_#_ -->
+		<!-- <servlet-class> com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class> 
+			<init-param> <param-name>com.sun.jersey.config.property.packages</param-name> 
+			<param-value>brb.research.rest</param-value> </init-param> -->
+
+<!-- Reference URL: http://cxf.apache.org/docs/jaxrs-services-configuration.html#JAXRSServicesConfiguration-WithCXFNonSpringJaxrsServlet -->
+		<!-- #################### APACHE CXF RS CONFIGURATION ############################### -->
+		
+		<servlet-name>cxf-servlet</servlet-name>
+		<servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet</servlet-class>
+		<init-param>
+			<param-name>jaxrs.serviceClasses</param-name>
+			<param-value>brb.research.rest.Service</param-value>
+		</init-param>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>jersey-servlet</servlet-name>
+		<servlet-name>cxf-servlet</servlet-name>
 		<url-pattern>/home/*</url-pattern>
 	</servlet-mapping>
-
+	
 </web-app>

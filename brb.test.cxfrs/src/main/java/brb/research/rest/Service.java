@@ -10,7 +10,6 @@ import javax.ws.rs.core.MediaType;
  * @author VICKY BRB
  *
  */
-@Path("home")
 public class Service {
 
 	/**
