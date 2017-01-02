@@ -28,6 +28,11 @@ public class Service {
 		return "hello";
 	}
 
+	/**
+	 * 
+	 * @param name
+	 * @param response
+	 */
 	@GET
 	@Consumes("application/json")
 	@Produces("application/json")
@@ -35,6 +40,7 @@ public class Service {
 	public void submit(@PathParam(value = "name") final String name, final @Suspended AsyncResponse response) {
 		System.out.println(Thread.currentThread().getName());
 		new Thread() {
+			
 			public void run() {
 				System.out.println(Thread.currentThread().getName());
 				
@@ -45,11 +51,8 @@ public class Service {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				//response.resume("Hello " + name);
+				response.resume("Hello " + name);
 			}
 		}.start();
-		
-		
 	}
-
 }
